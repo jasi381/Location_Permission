@@ -107,8 +107,8 @@ class MainActivity : ComponentActivity() {
     private fun startLocationUpdates() {
         locationCallback?.let {
             val locationRequest = LocationRequest.create().apply {
-                interval = 10000
-                fastestInterval = 5000
+                interval = 1000
+                fastestInterval = 1000
                 priority = LocationRequest.PRIORITY_HIGH_ACCURACY
             }
             fusedLocationClient?.requestLocationUpdates(
@@ -124,12 +124,15 @@ class MainActivity : ComponentActivity() {
         if (locationRequired) {
             startLocationUpdates()
         }
+        // if the user enables the location after the app is in the background
     }
 
     override fun onPause() {
         super.onPause()
         locationCallback?.let { fusedLocationClient?.removeLocationUpdates(it) }
     }
+
+
 
 
 }
